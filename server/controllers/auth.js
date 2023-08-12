@@ -32,7 +32,11 @@ export const signin = async (req, res, next) => {
     if (!isCorrect) return next(createError(400, "Invalid credentials"));
 
     // then create jwt token to send to signed in user after sucessfuly signed in
-    const token = jwt.sign({ id: user._id }, process.env.JWT);
+    const token = jwt.sign(
+      { id: user._id, isAdmin: user.isAdmin },
+      process.env.JWT,
+      { expiresIn: "5d" }
+    );
 
     // additional security to hide the hide hashed password
     // hide the hashed password from the the rest of user data
