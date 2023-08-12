@@ -2,22 +2,27 @@ import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema(
   {
-    name: {
-      type: "string",
+    username: {
+      type: String,
       required: true,
       unique: true,
     },
     email: {
-      type: "string",
+      type: String,
       required: true,
       unique: true,
     },
     password: {
-      type: "string",
+      type: String,
       required: true,
     },
-    img: {
-      type: "string",
+    profilePic: {
+      type: String,
+      defaut: "",
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }
