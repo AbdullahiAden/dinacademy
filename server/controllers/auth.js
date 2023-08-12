@@ -40,14 +40,14 @@ export const signin = async (req, res, next) => {
 
     // additional security to hide the hide hashed password
     // hide the hashed password from the the rest of user data
-    const { password, ...others } = user._doc;
+    const { password, ...info } = user._doc;
     res
       .cookie("access_token", token, {
         httpOnly: true,
       })
       .status(200)
       // send the other user data except the password
-      .json(others);
+      .json(info);
   } catch (err) {
     next(err);
   }
