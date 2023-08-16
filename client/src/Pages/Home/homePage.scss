@@ -1,0 +1,82 @@
+$base-color: #09172d;
+$secondary-color: #00b2fe;
+
+.homePage {
+  background-color: $base-color;
+  color: white;
+}
+.intro-wrapper {
+  display: flex;
+
+  padding: 2rem;
+  gap: 1rem;
+  background-image: url(../../img/backImage.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.intro-sec {
+  gap: 25px;
+  flex: 7;
+
+  .left-sec {
+    padding: 3rem 1rem;
+    margin: 1rem 0;
+
+    h1 {
+      padding: 0 0 1rem 0;
+      font-size: 4rem;
+    }
+
+    p {
+      font-size: larger;
+      padding: 2rem 0;
+    }
+  }
+  button {
+    background: #00b2fe;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 33px;
+    font-weight: bolder;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  button:hover {
+    color: $base-color;
+  }
+}
+
+.image-sec {
+  flex: 3;
+}
+
+@media (280px <= width <=600px) {
+  .intro-wrapper {
+    flex-direction: column;
+
+    padding: 2.5rem 0 1rem 0;
+
+    background-image: url(../../img/backImage.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .intro-sec {
+    color: yellow;
+    padding: 1rem 1rem;
+
+    .left-sec {
+      padding: 1rem;
+      font-size: 1rem;
+
+      h1 {
+        font-size: 2.5rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
+}
