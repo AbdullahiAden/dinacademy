@@ -1,0 +1,36 @@
+nav{
+    display: flex;
+    gap: 5px;
+    padding: 10px 33px;
+    align-items: center;
+    border: 1px solid blue;
+
+    .logo{
+        color: #00B2FE;
+        text-decoration: none;
+        flex: 1;
+
+    }
+
+    ul{
+        flex:5;
+        display: flex;
+        gap: 45px;
+
+        justify-content: flex-end;
+        align-items: center;
+        padding: 10px;
+
+        li{
+            list-style: none;
+        }
+
+        .nav-links{
+            text-decoration: none;
+
+        }  .nav-links:hover{
+                color: #00B2FE;
+
+            }
+    }
+}
