@@ -71,9 +71,10 @@ nav .menu span {
   cursor: pointer;
 }
 
-@media (280px <= width <=600px) {
+@media (280px <= width <=900px) {
   nav {
     padding: 10px 3px;
+    background-color: $base-color;
   }
   nav .logo {
     height: 33px;
@@ -98,6 +99,7 @@ nav .menu span {
 
   nav ul.open {
     display: flex;
+    background-color: $base-color;
   }
 
   nav ul li {

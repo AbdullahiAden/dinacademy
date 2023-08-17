@@ -1,12 +1,12 @@
 import { useState } from "react";
 import "./navbar.scss";
-import styled from "styled-components";
 import logo from "../../img/logo.png";
 
 import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <nav>
       <Link to="/">
