@@ -2,22 +2,25 @@ $base-color: #09172d;
 $secondary-color: #00b2fe;
 
 .homePage {
-  background-color: $base-color;
   color: white;
+  background: $base-color;
 }
-.intro-wrapper {
-  display: flex;
 
-  padding: 2rem;
-  gap: 1rem;
+.intro-wrapper {
   background-image: url(../../img/backImage.png);
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 1rem;
 }
+
 .intro-sec {
   gap: 25px;
   flex: 7;
+  max-width: 70%;
+  border: 1px solid white;
 
   .left-sec {
     padding: 3rem 1rem;
@@ -25,7 +28,7 @@ $secondary-color: #00b2fe;
 
     h1 {
       padding: 0 0 1rem 0;
-      font-size: 4rem;
+      font-size: 3.5rem;
     }
 
     p {
@@ -47,25 +50,25 @@ $secondary-color: #00b2fe;
   }
 }
 
-.image-sec {
+.image-sec img {
   flex: 3;
+  border: 1px solid red;
+  height: 70%;
 }
 
-@media (280px <= width <=600px) {
+@media (280px <= width <=900px) {
+  .homePage {
+    background-position: center;
+  }
+
   .intro-wrapper {
     flex-direction: column;
-
-    padding: 2.5rem 0 1rem 0;
-
-    background-image: url(../../img/backImage.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
   }
 
   .intro-sec {
     color: yellow;
-    padding: 1rem 1rem;
+    padding: 2rem 1rem;
+    max-width: 90%;
 
     .left-sec {
       padding: 1rem;

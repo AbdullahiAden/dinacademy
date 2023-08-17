@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../../components/navbar/Navbar";
-import image from "../../img/image.jpg";
+import pic from "../../img/pic.png";
 
 import "./homePage.scss";
 
@@ -16,8 +16,10 @@ const HomePage = () => {
             <button>JOIN NOW</button>
           </div>
         </div>
+      </div>
 
-        <div className="image-sec"></div>
+      <div>
+        <h2>Browse Courses</h2>
       </div>
     </div>
   );
