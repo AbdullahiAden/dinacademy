@@ -2,7 +2,10 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-
-  background-color: #09172d;
-  color: #fff;
+  color: white;
+}
+html {
+  background-color: #060c11;
+}
+.App {
 }
