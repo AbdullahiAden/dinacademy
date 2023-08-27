@@ -1,4 +1,4 @@
-$base-color: #09172d;
+$base-color: #060c11;
 $secondary-color: #00b2fe;
 
 .active {
@@ -13,6 +13,8 @@ nav {
   padding: 10px 33px;
   position: sticky;
   top: 0;
+  border-bottom: 1px solid $secondary-color;
+  border-radius: 2px 15px;
 }
 
 nav .logo {
