@@ -1,9 +1,8 @@
-$base-color: #09172d;
+$base-color: #060c11;
 $secondary-color: #00b2fe;
 
 .homePage {
   color: white;
-  background: $base-color;
 }
 
 .intro-wrapper {
@@ -14,6 +13,9 @@ $secondary-color: #00b2fe;
   flex-direction: column;
   padding: 2rem;
   gap: 1rem;
+
+  box-shadow: 0 59px 88px black;
+  margin-bottom: 3rem;
 }
 
 .intro-sec {
