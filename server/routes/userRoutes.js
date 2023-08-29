@@ -3,12 +3,14 @@ import {
   authUser,
   deleteUser,
   getAllUsers,
-  getUser,
+  getUserProfile,
   logoutUser,
   registerUser,
-  updateUser,
+  updateUserProfile,
 } from "../controllers/userController.js";
-import { verifyToken } from "../verifyToken.js";
+
+// import { protect } from "../middleware/authMiddleware.js";
+import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
@@ -16,16 +18,16 @@ router.post("/", registerUser);
 router.post("/auth", authUser);
 router.post("/logout", logoutUser);
 
-// update user
-router.put("/:id", verifyToken, updateUser);
-
-//delete user
-router.delete("/:id", verifyToken, deleteUser);
-
 //get a user
-router.get("/find/:id", getUser);
+router.get("/profile", protect, getUserProfile);
 
-//get all user
-router.get("/", verifyToken, getAllUsers);
+// update user
+router.put("/profile/update", protect, updateUserProfile);
+
+// //delete user
+// router.delete("/:id", protect, deleteUser);
+
+// //get all user
+// router.get("/", protect, getAllUsers);
 
 export default router;

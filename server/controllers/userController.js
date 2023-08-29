@@ -66,22 +66,26 @@ const logoutUser = asyncHandler(async (req, res) => {
   });
   res.status(200).json({ message: "Logged out successfully" });
 });
-//  get  user profile
-// GET /api/users/profile
-// access private
+// @desc    Get user profile
+// @route   GET /api/users/profile
+// @access  Private
 const getUserProfile = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: "get user" });
-});
-//  update user profile
-// PUT /api/users/profile
-// access private
-const updateUserProfile = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: "update user" });
-});
+  const user = await User.findById(req.user._id);
 
-const updateUser = async (req, res, next) => {
+  if (user) {
+    res.json(user);
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+// @desc    Update user profile
+// @route   PUT /api/users/profile
+// @access  Private
+const updateUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
   // compare logged in user from jwt with current(params.id),user can update its own cred  & so can admin
-  if (req.params.id === req.user.id || req.user.isAdmin) {
+  if (user) {
     // if password is updated, we encrypt it again
     if (req.body.password) {
       const salt = bcrypt.genSaltSync(10);
@@ -89,22 +93,18 @@ const updateUser = async (req, res, next) => {
       req.body.password = hash;
     }
 
-    try {
-      const updatedUser = await User.findByIdAndUpdate(
-        req.params.id,
-        {
-          $set: req.body,
-        },
-        { new: true }
-      );
-      res.status(200).json(updatedUser);
-    } catch (err) {
-      next(err);
-    }
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user._id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedUser);
   } else {
     return next(createError(403, "you can update only your account"));
   }
-};
+});
 
 const deleteUser = async (req, res, next) => {
   // compare logged in user from jwt with current(params.id),user can delete its own cred  & so can admin
@@ -118,17 +118,6 @@ const deleteUser = async (req, res, next) => {
     }
   } else {
     return next(createError(403, "you can delete only your account"));
-  }
-};
-
-const getUser = async (req, res, next) => {
-  try {
-    const user = await User.findById(req.params.id);
-    const { password, ...info } = user._doc;
-
-    res.status(200).json(info);
-  } catch (err) {
-    next(err);
   }
 };
 
@@ -156,8 +145,8 @@ export {
   authUser,
   registerUser,
   logoutUser,
-  updateUser,
+  getUserProfile,
+  updateUserProfile,
   deleteUser,
-  getUser,
   getAllUsers,
 };
