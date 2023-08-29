@@ -2,11 +2,26 @@ import asyncHandler from "express-async-handler";
 import { errorHandler } from "../middleware/errorMiddleware.js";
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
+import generateToken from "../utils/generateToken.js";
 
 //  auth user / set token
 // POST /api/users/auth
 const authUser = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: "auth user" });
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+  if (!user) throw new Error("Invalid email or password");
+
+  // compare password with hashed password in db
+  const matchPassword = await bcrypt.compare(password, user.password);
+
+  if (user && matchPassword) {
+    generateToken(res, user._id);
+    res.status(200).json(user);
+  } else {
+    res.status(401);
+    throw new Error("Invalid email or password");
+  }
 });
 
 //  register new user
@@ -31,6 +46,8 @@ const registerUser = asyncHandler(async (req, res) => {
   if (newUser) {
     // return all user info except password
     const { password, ...restUserInfo } = newUser._doc;
+
+    generateToken(res, restUserInfo._id);
     res.status(201).json(restUserInfo);
   } else {
     res.status(400);
