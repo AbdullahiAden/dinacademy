@@ -16,8 +16,10 @@ const authUser = asyncHandler(async (req, res) => {
   const matchPassword = await bcrypt.compare(password, user.password);
 
   if (user && matchPassword) {
-    generateToken(res, user._id);
-    res.status(200).json(user);
+    const { password, ...restUserInfo } = user._doc;
+
+    generateToken(res, restUserInfo._id);
+    res.status(200).json(restUserInfo);
   } else {
     res.status(401);
     throw new Error("Invalid email or password");
