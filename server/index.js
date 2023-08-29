@@ -4,7 +4,6 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
-import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/userRoutes.js";
 import videoRoutes from "./routes/videoRoutes.js";
 import cookieParser from "cookie-parser";
@@ -31,7 +30,6 @@ app.use(cors());
 app.use(cors({ origin: true, credentials: true }));
 
 // routes
-app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/videos", videoRoutes);
 

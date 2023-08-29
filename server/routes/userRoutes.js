@@ -27,7 +27,7 @@ router.put("/profile/update", protect, updateUserProfile);
 // //delete user
 // router.delete("/:id", protect, deleteUser);
 
-// //get all user
-// router.get("/", protect, getAllUsers);
+//get all user
+router.get("/allUsers", protect, getAllUsers);
 
 export default router;
