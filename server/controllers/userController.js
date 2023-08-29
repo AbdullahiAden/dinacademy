@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler";
 import { errorHandler } from "../middleware/errorMiddleware.js";
-import User from "../models/User.js";
+import User from "../models/UserModels.js";
 import bcrypt from "bcryptjs";
 import generateToken from "../utils/generateToken.js";
 
@@ -102,7 +102,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     );
     res.status(200).json(updatedUser);
   } else {
-    return next(createError(403, "you can update only your account"));
+    res.status(404);
+    throw new Error("User not found");
   }
 });
 
@@ -122,22 +123,20 @@ const deleteUser = async (req, res, next) => {
 };
 
 const getAllUsers = async (req, res, next) => {
+  const user = await User.findById(req.user._id);
+
   const query = req.query.new;
 
   // only admin can get all users
-  if (req.user.isAdmin) {
-    try {
-      // fetch last 3 users (.sort(_id:-1)) users if there is query( users/?new=true ), else fetch all
-      const allUsers = query
-        ? await User.find().sort({ _id: -1 }).limit(3)
-        : await User.find();
+  if (req.user.isAdmin === true) {
+    // fetch last 3 users (.sort(_id:-1)) users if there is query( users/?new=true ), else fetch all
+    const allUsers = query
+      ? await User.find().sort({ _id: -1 }).limit(3)
+      : await User.find();
 
-      res.status(200).json(allUsers);
-    } catch (err) {
-      next(err);
-    }
+    res.status(200).json(allUsers);
   } else {
-    return next(createError(403, "you are not allowed to see all users"));
+    res.status(400).json({ message: "only admin can see all users" });
   }
 };
 
