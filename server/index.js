@@ -1,10 +1,12 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cors from "cors";
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 import authRoutes from "./routes/auth.js";
-import userRoutes from "./routes/users.js";
-import videoRoutes from "./routes/videos.js";
+import userRoutes from "./routes/userRoutes.js";
+import videoRoutes from "./routes/videoRoutes.js";
 import cookieParser from "cookie-parser";
 
 const app = express();
@@ -24,6 +26,9 @@ const connect = () => {
 
 app.use(cookieParser());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
 
 // routes
 app.use("/api/auth", authRoutes);
@@ -31,16 +36,20 @@ app.use("/api/users", userRoutes);
 app.use("/api/videos", videoRoutes);
 
 // middleware for better error handling
-app.use((err, req, res, next) => {
-  // if we dont send specific error, default 500
-  const status = err.status || 500;
-  const message = err.message || "something went wrong!";
-  return res.status(status).json({
-    success: false,
-    status,
-    message,
-  });
-});
+
+app.use(notFound);
+app.use(errorHandler);
+
+// app.use((err, req, res, next) => {
+//   // if we dont send specific error, default 500
+//   const status = err.status || 500;
+//   const message = err.message || "something went wrong!";
+//   return res.status(status).json({
+//     success: false,
+//     status,
+//     message,
+//   });
+// });
 
 app.listen(8800, () => {
   connect();
