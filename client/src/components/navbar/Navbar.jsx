@@ -54,6 +54,9 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
+              <NavLink className="nav-links">{userInfo.email}</NavLink>
+            </li>
+            <li>
               <NavLink className="nav-links" onClick={logoutHandler}>
                 logout
               </NavLink>
