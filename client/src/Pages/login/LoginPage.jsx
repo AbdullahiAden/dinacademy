@@ -1,41 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import Navbar from "../../components/navbar/Navbar";
 import img from "../../img/img.png";
-import "../Signup/signupPage.scss";
+import "./loginPage.scss";
 import axios from "axios";
 
-const LoginPage = () => {
-  const [signUser, setSignUser] = useState([]);
-  const [error, setError] = useState("");
+import { useDispatch, useSelector } from "react-redux";
+import { useLoginMutation } from "../../slices/usersApiSlice";
+import { setCredentials } from "../../slices/authSlice";
 
+import { toast } from "react-toastify";
+
+const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  //to get the function to call to  fire off login mutation
+  const [login, { isLoading }] = useLoginMutation();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    // if userinfo means we are logged in
+    //todo:: navigate to dashboard
+    if (userInfo) {
+      navigate("/");
+    }
+  }, [userInfo, navigate]);
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8800/api/users/auth", {
-        email,
-        password,
-      });
-      console.log(res.data);
+      //call login in our mutation in our usersApiSlice
+      //returns a promise, so we unwrap that promise
+      const res = await login({ email, password }).unwrap();
+      console.log(res);
 
-      setEmail(res.data.email);
-      setPassword(res.data.password);
-      if (res.data) {
-        localStorage.setItem("jwt", res.data);
-        console.log("LOGGED IN");
-
-        navigate("/");
-      } else {
-        console.log("no data ");
-      }
-    } catch (error) {
-      console.log(error);
+      // then call setCredentials which will set logged in user data to localstorage & to our state
+      dispatch(setCredentials({ ...res }));
+      navigate("/");
+    } catch (err) {
+      toast(err?.data?.message || err.error);
     }
   };
   return (
