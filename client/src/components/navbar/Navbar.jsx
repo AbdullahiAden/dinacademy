@@ -11,7 +11,6 @@ import { toast } from "react-toastify";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const token = localStorage.getItem("jwt");
 
   const { userInfo } = useSelector((state) => state.auth);
 
