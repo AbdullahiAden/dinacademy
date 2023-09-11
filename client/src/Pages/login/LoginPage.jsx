@@ -11,6 +11,7 @@ import { useLoginMutation } from "../../slices/usersApiSlice";
 import { setCredentials } from "../../slices/authSlice";
 
 import { toast } from "react-toastify";
+import Loader from "../../components/Loader";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -35,13 +36,14 @@ const LoginPage = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     try {
-      //call login in our mutation in our usersApiSlice
+      //call login in our mutation in our usersApiSlice, it makes post req to backend
       //returns a promise, so we unwrap that promise
       const res = await login({ email, password }).unwrap();
       console.log(res);
 
       // then call setCredentials which will set logged in user data to localstorage & to our state
       dispatch(setCredentials({ ...res }));
+      //todo: to dashboard
       navigate("/");
     } catch (err) {
       toast(err?.data?.message || err.error);
@@ -66,9 +68,6 @@ const LoginPage = () => {
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
-                // onChange={(e) =>
-                //   setSignUser({ ...signUser, email: e.target.value })
-                // }
                 value={email}
               />
             </div>
@@ -80,13 +79,14 @@ const LoginPage = () => {
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
-                // onChange={(e) =>
-                //   setSignUser({ ...signUser, password: e.target.value })
-                // }
                 value={password}
               />
             </div>
-            <button>LOGIN</button>
+            {/* loader   */}
+            {isLoading && <Loader />}
+            <button type="submit" disabled={isLoading}>
+              LOGIN
+            </button>
           </form>
         </div>
         <div className="right-sec">
