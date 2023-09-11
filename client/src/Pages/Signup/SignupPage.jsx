@@ -1,23 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Navbar from "../../components/navbar/Navbar";
 import img from "../../img/img.png";
 import "../Signup/signupPage.scss";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { useRegisterMutation } from "../../slices/usersApiSlice";
+import { setCredentials } from "../../slices/authSlice";
+
+import Loader from "../../components/Loader";
 
 const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [register, { isLoading }] = useRegisterMutation();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/");
+    }
+  }, [navigate, userInfo]);
+
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8800/api/users", {
-        email,
-        password,
-      });
-      console.log(res.data);
-    } catch (error) {
-      console.log(error);
+      //call register in our mutation in our usersApiSlice, it makes post req to backend
+      //returns a promise, so we unwrap that promise
+      const res = await register({ email, password }).unwrap();
+      // set the user credentials to localstorage, login user
+      dispatch(setCredentials({ ...res }));
+      navigate("/");
+    } catch (err) {
+      toast(err?.data?.message || err.error, { autoClose: 500 });
     }
   };
 
@@ -36,6 +58,7 @@ const SignupPage = () => {
               <label className="label">Email:</label>
               <input
                 type="email"
+                id="email"
                 name="email"
                 onChange={(e) => {
                   setEmail(e.target.value);
@@ -54,7 +77,11 @@ const SignupPage = () => {
                 value={password}
               />
             </div>
-            <button>SIGN UP</button>
+            <button type="submit" disabled={isLoading}>
+              SIGN UP
+            </button>
+
+            {isLoading && <Loader />}
           </form>
         </div>
         <div className="right-sec">
