@@ -1,0 +1,40 @@
+$base-color: #060c11;
+$secondary-color: #00b2fe;
+
+.container {
+  background-color: $base-color;
+  border: 1px solid #00b2fe;
+}
+
+.vid-wrapper {
+  margin: auto;
+  display: flex;
+  border: 1px solid rgb(255, 0, 230);
+  width: 900px;
+  padding-right: 4rem;
+}
+
+.video-card {
+  max-width: 300px;
+  max-height: 300px;
+  flex-direction: column;
+  border: 1px solid white;
+  margin: 10px;
+  border-radius: 15px;
+
+  img {
+    border-radius: 15px;
+    width: 100%;
+  }
+  .vid-card-desc {
+    color: yellow;
+  }
+}
+
+.arabic-sec {
+  display: flex;
+
+  h1 {
+    margin: auto;
+  }
+}
