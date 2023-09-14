@@ -45,7 +45,7 @@ const SignupPage = () => {
   return (
     <div className="container">
       <Navbar />
-      <div className="wrapper">
+      <div className="form-wrapper">
         <div className="form-sec">
           <div className="top-sec">
             <h2>SIGN UP </h2>
