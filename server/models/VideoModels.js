@@ -12,11 +12,9 @@ const VideoSchema = new mongoose.Schema(
     },
     description: {
       type: "string",
-      required: true,
     },
     thumbnail: {
       type: "string",
-      required: true,
     },
     videoUrl: {
       type: "string",
