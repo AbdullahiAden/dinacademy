@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import img from "../../img/img.png";
 import "../Signup/signupPage.scss";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { useRegisterMutation } from "../../slices/usersApiSlice";
@@ -25,7 +24,7 @@ const SignupPage = () => {
 
   useEffect(() => {
     if (userInfo) {
-      navigate("/");
+      navigate("/dashboard");
     }
   }, [navigate, userInfo]);
 

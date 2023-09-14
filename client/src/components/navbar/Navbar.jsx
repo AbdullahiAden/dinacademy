@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./navbar.scss";
 import logo from "../../img/logo.png";
 import arrowDown from "../../img/arrowdown.svg";
@@ -18,6 +18,12 @@ const Navbar = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/dashboard");
+    }
+  }, [navigate, userInfo]);
 
   // function to call the logout mutation
   const [logoutApiCall] = useLogoutMutation();

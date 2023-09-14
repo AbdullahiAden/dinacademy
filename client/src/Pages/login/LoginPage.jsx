@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Navbar from "../../components/navbar/Navbar";
 import img from "../../img/img.png";
 import "./loginPage.scss";
-import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useLoginMutation } from "../../slices/usersApiSlice";
@@ -29,7 +28,7 @@ const LoginPage = () => {
     // if userinfo means we are logged in
     //todo:: navigate to dashboard
     if (userInfo) {
-      navigate("/");
+      navigate("/dashboard");
     }
   }, [userInfo, navigate]);
 
@@ -44,7 +43,7 @@ const LoginPage = () => {
       // then call setCredentials which will set logged in user data to localstorage & to our state
       dispatch(setCredentials({ ...res }));
       //todo: to dashboard
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       toast(err?.data?.message || err.error);
     }
