@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./navbar.scss";
 import logo from "../../img/logo.png";
+import arrowDown from "../../img/arrowdown.svg";
 
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,6 +12,7 @@ import { toast } from "react-toastify";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [openDropdwon, setOpenDropDown] = useState(false);
 
   const { userInfo } = useSelector((state) => state.auth);
 
@@ -52,12 +54,27 @@ const Navbar = () => {
                 dashboard
               </NavLink>
             </li>
+
             <li>
-              <NavLink className="nav-links">{userInfo.email}</NavLink>
-            </li>
-            <li>
-              <NavLink className="nav-links" onClick={logoutHandler}>
-                logout
+              <NavLink
+                className="nav-links"
+                onClick={() => setOpenDropDown(!openDropdwon)}
+              >
+                Account
+                {openDropdwon ? (
+                  <>
+                    <img src={arrowDown} alt="" className="close-dropdown" />
+                    <div className="dropdown-items">
+                      <div className="items">Profile</div>
+                      <div className="items">{userInfo.email}</div>
+                      <div className="items" onClick={logoutHandler}>
+                        logout
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <img src={arrowDown} alt="" className="open-dropdown" />
+                )}
               </NavLink>
             </li>
           </ul>

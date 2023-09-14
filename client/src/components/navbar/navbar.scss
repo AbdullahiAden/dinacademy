@@ -6,6 +6,7 @@ $secondary-color: #00b2fe;
 }
 
 nav {
+  height: 60px;
   background-color: $base-color;
   display: flex;
   align-items: center;
@@ -48,9 +49,36 @@ nav ul li a {
   border-radius: 0.5rem;
 }
 
-nav ul li a:not(.active):hover {
-  border: 1px solid $secondary-color;
-  border-radius: 2px 10px;
+nav ul li a:hover {
+  color: $secondary-color;
+}
+
+.open-dropdown {
+  width: 15px;
+  height: 15px;
+  margin-left: 10px;
+  background-color: $secondary-color;
+}
+.close-dropdown {
+  width: 15px;
+  height: 15px;
+  margin-left: 10px;
+  background-color: $secondary-color;
+  transform: rotate(180deg);
+}
+.dropdown-items {
+  background-color: $secondary-color;
+  position: absolute;
+  top: 58px;
+  width: 180px;
+
+  .items {
+    color: $base-color;
+    padding: 10px;
+  }
+  .items:hover {
+    color: white;
+  }
 }
 
 nav .menu {
@@ -75,6 +103,7 @@ nav .menu span {
 
 @media (280px <= width <=900px) {
   nav {
+    height: 60px;
     padding: 10px 3px;
     background-color: $base-color;
   }
@@ -94,9 +123,11 @@ nav .menu span {
   nav ul {
     display: none;
     flex-direction: column;
-    width: 100%;
-    margin: 1.5rem 0 0.25rem 0;
+    width: 100vw;
+    margin: 0.5rem 0 0 0;
     gap: 0.3rem;
+    top: 53px;
+    position: absolute;
   }
 
   nav ul.open {
@@ -111,5 +142,56 @@ nav .menu span {
 
   nav ul li a {
     margin: 0.2rem 0.5rem;
+  }
+
+  .open-dropdown {
+    width: 15px;
+    height: 15px;
+    margin-left: 10px;
+    background-color: $secondary-color;
+  }
+  .close-dropdown {
+    width: 15px;
+    height: 15px;
+    margin-left: 10px;
+    background-color: $secondary-color;
+    transform: rotate(180deg);
+  }
+  .dropdown-items {
+    background-color: $secondary-color;
+    position: relative;
+    width: 250px;
+    transform: translatY(50%);
+    transform: translateX(20%);
+    border-radius: 3px;
+
+    .items {
+      color: $base-color;
+      padding: 10px;
+    }
+  }
+}
+@media (280px <= width <=400px) {
+  .dropdown-items {
+    position: relative;
+    max-width: 280px;
+    top: 10px;
+    transform: translateX(-8%);
+  }
+}
+
+@media (401px <= width <=600px) {
+  .dropdown-items {
+    max-width: 500px;
+    top: 10px;
+    transform: translateX(8%);
+  }
+}
+
+@media (601px <= width <=900px) {
+  .dropdown-items {
+    max-width: 500px;
+    top: 10px;
+    transform: translateX(78%);
   }
 }
