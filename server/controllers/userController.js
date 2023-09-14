@@ -123,8 +123,6 @@ const deleteUser = async (req, res, next) => {
 };
 
 const getAllUsers = async (req, res, next) => {
-  const user = await User.findById(req.user._id);
-
   const query = req.query.new;
 
   // only admin can get all users
