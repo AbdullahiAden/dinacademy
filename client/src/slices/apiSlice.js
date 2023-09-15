@@ -5,8 +5,11 @@ const baseQuery = fetchBaseQuery({ baseUrl: "" });
 
 export const apiSlice = createApi({
   baseQuery,
-  tagTypes: ["User"],
+  tagTypes: ["User", "Videos"],
   //userApiSlice will use injects endpoints here
   endpoints: (builder) => ({}),
+
   credentials: "include", // shows cookie in browser
 });
+
+export const { useGetVideos } = apiSlice;
