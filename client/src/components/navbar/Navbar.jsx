@@ -19,11 +19,11 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (userInfo) {
-      navigate("/dashboard");
-    }
-  }, [navigate, userInfo]);
+  // useEffect(() => {
+  //   if (userInfo) {
+  //     navigate("/dashboard");
+  //   }
+  // }, [navigate, userInfo]);
 
   // function to call the logout mutation
   const [logoutApiCall] = useLogoutMutation();
@@ -43,7 +43,7 @@ const Navbar = () => {
 
   return (
     <nav>
-      <Link to="/">
+      <Link to={userInfo ? "/dashboard" : "/"}>
         <img src={logo} alt="" className="logo" />
       </Link>
       <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
