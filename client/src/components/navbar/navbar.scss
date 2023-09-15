@@ -6,6 +6,8 @@ $secondary-color: #00b2fe;
 }
 
 nav {
+  position: fixed;
+  z-index: 1;
   height: 60px;
   background-color: $base-color;
   display: flex;
