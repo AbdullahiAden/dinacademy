@@ -9,7 +9,7 @@ $secondary-color: #00b2fe;
 .vid-wrapper {
   margin: auto;
   display: flex;
-  border: 1px solid rgb(255, 0, 230);
+  border: 1px solid rgb(15, 205, 223);
   width: 900px;
   padding-right: 4rem;
 }
@@ -18,7 +18,6 @@ $secondary-color: #00b2fe;
   max-width: 300px;
   max-height: 300px;
   flex-direction: column;
-  border: 1px solid white;
   margin: 10px;
   border-radius: 15px;
 
@@ -27,7 +26,8 @@ $secondary-color: #00b2fe;
     width: 100%;
   }
   .vid-card-desc {
-    color: yellow;
+    color: $secondary-color;
+    font-weight: bolder;
   }
 }
 
@@ -36,5 +36,21 @@ $secondary-color: #00b2fe;
 
   h1 {
     margin: auto;
+  }
+}
+
+@media (464px <=width <=604px) {
+  .vid-wrapper {
+    width: 460px;
+  }
+}
+@media (605px <=width <=754px) {
+  .vid-wrapper {
+    width: 500px;
+  }
+}
+@media (754px <=width <=907px) {
+  .vid-wrapper {
+    width: 750px;
   }
 }

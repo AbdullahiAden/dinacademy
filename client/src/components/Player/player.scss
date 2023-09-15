@@ -1,0 +1,15 @@
+.player-wrapper {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem;
+}
+.player-sec {
+  flex-direction: column;
+  flex: 2;
+  border: 1px solid red;
+}
+.side-vids {
+  flex: 1;
+  padding: 0 1rem;
+  border: 1px solid red;
+}
