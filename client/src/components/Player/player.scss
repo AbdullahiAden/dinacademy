@@ -1,15 +1,47 @@
+.player-container {
+  // display: flex;
+}
 .player-wrapper {
   display: flex;
-  gap: 1rem;
-  margin: 2rem;
-}
-.player-sec {
-  flex-direction: column;
-  flex: 2;
+  gap: 2rem;
+  height: 500px;
   border: 1px solid red;
+
+  margin: 1rem 2rem;
 }
-.side-vids {
+
+.player-sec {
+  flex: 2;
+
+  .video {
+    border: 1px solid white;
+  }
+  .video-desc {
+    font-weight: bold;
+    padding-top: 1rem;
+  }
+}
+.side-video-sec {
+  border: 1px solid white;
   flex: 1;
   padding: 0 1rem;
-  border: 1px solid red;
+
+  .recommended-vids {
+    display: flex;
+    gap: 1rem;
+    border: 1px solid red;
+    align-items: center;
+    padding: 0;
+
+    .reco-vid-img {
+      height: 100px;
+      width: 200px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .reco-vid-titel {
+      display: flex;
+    }
+  }
 }
