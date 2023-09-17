@@ -9,7 +9,7 @@ $secondary-color: #00b2fe;
 .vid-wrapper {
   margin: auto;
   display: flex;
-  border: 1px solid rgb(15, 205, 223);
+  border: 1px solid rgb(15, 223, 25);
   width: 900px;
   padding-right: 4rem;
 }
@@ -39,6 +39,11 @@ $secondary-color: #00b2fe;
   }
 }
 
+@media (280px <=width <=463px) {
+  .vid-wrapper {
+    width: 280px;
+  }
+}
 @media (464px <=width <=604px) {
   .vid-wrapper {
     width: 460px;

@@ -11,22 +11,24 @@ import { useGetAllVideosQuery } from "../../slices/videosApiSlice";
 import { useGetVideos } from "../../slices/apiSlice";
 import { setVideosData } from "../../slices/videoSlice";
 
+import Loader from "../Loader";
+
 const VideoCard = (props) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-      slidesToSlide: 3, // optional, default to 1.
+      items: 4,
+      slidesToSlide: 3.9, // optional, default to 1.
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-      slidesToSlide: 2, // optional, default to 1.
+      breakpoint: { max: 1023, min: 464 },
+      items: 3,
+      slidesToSlide: 2.9, // optional, default to 1.
     },
     mobile: {
       breakpoint: { max: 464, min: 250 },
-      items: 1,
-      slidesToSlide: 1, // optional, default to 1.
+      items: 2,
+      slidesToSlide: 1.9, // optional, default to 1.
     },
   };
 
@@ -35,7 +37,7 @@ const VideoCard = (props) => {
 
   const { videosData } = useSelector((state) => state.videos);
 
-  const { data, isLoading } = useGetAllVideosQuery();
+  const { data, isLoading, error } = useGetAllVideosQuery();
 
   useEffect(() => {
     if (data) {
@@ -44,6 +46,12 @@ const VideoCard = (props) => {
       dispatch(setVideosData({ ...data }));
     }
   }, [data]);
+
+  const handleOnClick = (e) => {
+    {
+      // console.log(e);
+    }
+  };
 
   // const getVideos = async () => {
   //   try {
@@ -55,23 +63,34 @@ const VideoCard = (props) => {
   // };
   return (
     <div className="container">
-      <Carousel responsive={responsive} className="vid-wrapper">
-        {/* <Link to="/watch"> */}
-        <div className="video-card">
-          <img
-            src="https://plus.unsplash.com/premium_photo-1677231559663-b9f6a7c33c77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80"
-            alt=""
-          />
-          <p className="vid-card-desc"> intro to seeking z</p>
-        </div>
-        {/* </Link> */}
-        <div className="video-card">
-          <img
-            src="https://plus.unsplash.com/premium_photo-1677231559663-b9f6a7c33c77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80"
-            alt=""
-          />
-          <p className="vid-card-desc"> intro to seeking z</p>
-        </div>
+      <Carousel
+        className="vid-wrapper"
+        responsive={responsive}
+        swipeable={true}
+        draggable={true}
+        infinite={true}
+        keyBoardControl={true}
+        customTransition="all .5"
+        transitionDuration={500}
+        containerClass="carousel-contaner"
+        deviceType={props.deviceType}
+        itemClass="carousel-item-padding-40-px"
+      >
+        {isLoading && <Loader />}
+        {data &&
+          data.map((video) => {
+            return (
+              <Link to={`/watch/${video._id}`} key={video._id}>
+                <div
+                  className="video-card"
+                  onClick={() => handleOnClick(video._id)}
+                >
+                  <img src={video.thumbnail} alt="" />
+                  {video.titel}
+                </div>
+              </Link>
+            );
+          })}
       </Carousel>
     </div>
   );
