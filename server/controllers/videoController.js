@@ -4,7 +4,16 @@ import Video from "../models/VideoModels.js";
 const addVideo = asyncHandler(async (req, res) => {
   //   const newVideo = new Video({ playlistId: req.user.id, ...req.body });
   const newVideo = new Video({ ...req.body });
+  // if video exists
+  // const { titel } = req.body;
+  // const videoExists = await Video.findOne({ titel });
+  // if (videoExists) {
+  //   res.status(400);
+  //   throw new Error("video already exists");
+  // }
+
   await newVideo.save();
+
   res.status(201).json(newVideo);
 
   //if video is created

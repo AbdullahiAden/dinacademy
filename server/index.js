@@ -6,6 +6,7 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 import userRoutes from "./routes/userRoutes.js";
 import videoRoutes from "./routes/videoRoutes.js";
+import bookRoutes from "./routes/bookRoutes.js";
 import cookieParser from "cookie-parser";
 
 const app = express();
@@ -32,6 +33,7 @@ app.use(cors({ origin: true, credentials: true }));
 // routes
 app.use("/api/users", userRoutes);
 app.use("/api/videos", videoRoutes);
+app.use("/api/books", bookRoutes);
 
 // middleware for better error handling
 
