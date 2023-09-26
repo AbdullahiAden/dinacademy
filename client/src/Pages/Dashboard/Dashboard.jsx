@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Navbar from "../../components/navbar/Navbar";
-import VideoCard from "../../components/videoCard/VideoCard";
+import Card from "../../components/card/Card";
 
 const Dashboard = () => {
   useEffect(() => {
@@ -9,8 +9,8 @@ const Dashboard = () => {
   return (
     <div>
       <Navbar />
-      Dashboard
-      <VideoCard />
+      Dashboard Books Page
+      <Card />
     </div>
   );
 };
