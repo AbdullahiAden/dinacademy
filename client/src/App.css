@@ -1,3 +1,8 @@
+$base-color: #0e1117;
+$secondary-color: #00b2fe;
+$lighter-gray: #141820;
+$card-border: #263035;
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,7 +10,8 @@
   color: white;
 }
 html {
-  background-color: #060c11;
+  background-color: #0e1117;
+  color: white;
 }
 .App {
 }
