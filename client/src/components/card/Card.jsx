@@ -13,7 +13,7 @@ import { setBooksData } from "../../slices/bookSlice";
 
 import Loader from "../Loader";
 
-const VideoCard = (props) => {
+const Card = (props) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -83,7 +83,7 @@ const VideoCard = (props) => {
           data.map((book) => {
             return (
               <div key={book._id} className="card">
-                <Link to={`/books/${book._id}`}>
+                <Link to={`/books/${book._id}`} className="link">
                   <img
                     src={book.imgUrl}
                     alt=""
@@ -122,4 +122,4 @@ const VideoCard = (props) => {
   );
 };
 
-export default VideoCard;
+export default Card;

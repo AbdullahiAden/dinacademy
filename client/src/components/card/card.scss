@@ -1,5 +1,7 @@
-$base-color: #060c11;
+$base-color: #0e1117;
 $secondary-color: #00b2fe;
+$card-bg: #141820;
+$card-border: #263035;
 
 .card-container {
   border: 1px solid #00b2fe;
@@ -10,20 +12,26 @@ $secondary-color: #00b2fe;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  border: 1px solid rgb(15, 223, 25);
+  border: 1px solid rgb(15, 102, 223);
   padding-top: 1rem;
   gap: 2rem;
   // width: 900px;
 }
 
 .card {
-  border: 1px solid red;
+  border: 1px solid $card-border;
+  background: $card-bg;
   display: flex;
   width: 350px;
   height: 100%;
   flex-direction: column;
   border-radius: 5px;
-  padding: 0 1rem;
+  padding: 1rem;
+
+  .link {
+    text-decoration: none;
+    color: white;
+  }
 
   img {
     border-radius: 5px;
@@ -48,13 +56,20 @@ $secondary-color: #00b2fe;
 
 @media (300px <=width <=635px) {
   .card {
-    border: 1px solid red;
+    border: 1px solid $card-border;
+    background: $card-bg;
     display: flex;
-    width: 450px;
+    width: 350px;
     height: 100%;
     flex-direction: column;
     border-radius: 5px;
-    padding: 0 1rem;
+    padding: 1rem;
+    margin: 1rem;
+
+    .link {
+      text-decoration: none;
+      color: white;
+    }
 
     img {
       border-radius: 5px;
@@ -71,13 +86,19 @@ $secondary-color: #00b2fe;
 }
 @media (636px <=width <=900px) {
   .card {
-    border: 1px solid red;
+    border: 1px solid $card-border;
+    background: $card-bg;
     display: flex;
-    width: 300px;
+    width: 350px;
     height: 100%;
     flex-direction: column;
     border-radius: 5px;
-    padding: 0 1rem;
+    padding: 1rem;
+
+    .link {
+      text-decoration: none;
+      color: white;
+    }
 
     img {
       border-radius: 5px;
@@ -92,5 +113,3 @@ $secondary-color: #00b2fe;
     }
   }
 }
-
-// -------------
