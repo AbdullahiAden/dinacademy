@@ -1,6 +1,5 @@
 import { apiSlice } from "./apiSlice";
 const VIDEOS_URL = "/api/videos";
-
 //using this slice for logging in user
 //queries are fetching data from the backend
 // mutations are doing something to the backend like adding user like register and login user
@@ -23,10 +22,17 @@ export const VideosApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    getVideo: builder.query({
+      query: (name) => ({
+        url: `${VIDEOS_URL}/id`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
 //specific convention to export mutation
 //use + name + mutation
 //use + name + query
-export const { useAddVideoMutation, useGetAllVideosQuery } = VideosApiSlice;
+export const { useAddVideoMutation, useGetAllVideosQuery, useGetVideoQuery } =
+  VideosApiSlice;
