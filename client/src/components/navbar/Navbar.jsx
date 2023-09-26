@@ -9,10 +9,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../slices/authSlice";
 import { useLogoutMutation } from "../../slices/usersApiSlice";
 import { toast } from "react-toastify";
+import Upload from "../Upload/Upload";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdwon, setOpenDropDown] = useState(false);
+
+  const [openUpload, setOpenUpload] = useState(false);
 
   const { userInfo } = useSelector((state) => state.auth);
 
@@ -40,68 +43,91 @@ const Navbar = () => {
       console.log(err);
     }
   };
+  const handleUpload = async () => {
+    try {
+      {
+        console.log("upload");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
-    <nav>
-      <Link to={userInfo ? "/dashboard" : "/"}>
-        <img src={logo} alt="" className="logo" />
-      </Link>
-      <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+    <>
+      <nav>
+        <Link to={userInfo ? "/dashboard" : "/"}>
+          <img src={logo} alt="" className="logo" />
+        </Link>
+        <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
 
-      {userInfo ? (
-        <>
-          <ul className={menuOpen ? "open" : ""}>
-            <li>
-              <NavLink to="/dashboard" className="nav-links">
-                dashboard
-              </NavLink>
-            </li>
+        {userInfo ? (
+          <>
+            <ul className={menuOpen ? "open" : ""}>
+              <li>
+                <NavLink to="/dashboard" className="nav-links">
+                  dashboard
+                </NavLink>
+              </li>
 
-            <li>
-              <NavLink
-                className="nav-links"
-                onClick={() => setOpenDropDown(!openDropdwon)}
-              >
-                Account
-                {openDropdwon ? (
-                  <>
-                    <img src={arrowDown} alt="" className="close-dropdown" />
-                    <div className="dropdown-items">
-                      <div className="items">Profile</div>
-                      <div className="items">{userInfo.email}</div>
-                      <div className="items" onClick={logoutHandler}>
-                        logout
+              <li>
+                <NavLink
+                  className="nav-links"
+                  onClick={() => setOpenDropDown(!openDropdwon)}
+                >
+                  Account
+                  {openDropdwon ? (
+                    <>
+                      <img src={arrowDown} alt="" className="close-dropdown" />
+                      <div className="dropdown-items">
+                        <div className="items">Profile</div>
+                        <div className="items">{userInfo.email}</div>
+                        <div className="items" onClick={logoutHandler}>
+                          logout
+                        </div>
                       </div>
-                    </div>
-                  </>
-                ) : (
-                  <img src={arrowDown} alt="" className="open-dropdown" />
-                )}
-              </NavLink>
-            </li>
-          </ul>
-        </>
-      ) : (
-        <>
-          <ul className={menuOpen ? "open" : ""}>
-            <li>
-              <NavLink to="/signup" className="nav-links">
-                Signup
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/login" className="nav-links">
-                Login
-              </NavLink>
-            </li>
-          </ul>
-        </>
-      )}
-    </nav>
+                    </>
+                  ) : (
+                    <img src={arrowDown} alt="" className="open-dropdown" />
+                  )}
+                </NavLink>
+              </li>
+              {userInfo.isAdmin === true && (
+                <li>
+                  <NavLink
+                    to="#"
+                    className="nav-links"
+                    onClick={() => setOpenUpload(true)}
+                  >
+                    upload
+                  </NavLink>
+                </li>
+              )}
+            </ul>
+          </>
+        ) : (
+          <>
+            <ul className={menuOpen ? "open" : ""}>
+              <li>
+                <NavLink to="/signup" className="nav-links">
+                  Signup
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/login" className="nav-links">
+                  Login
+                </NavLink>
+              </li>
+            </ul>
+          </>
+        )}
+      </nav>
+      {openUpload && <Upload setOpenUpload={setOpenUpload} />}
+    </>
   );
 };
 
