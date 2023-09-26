@@ -2,9 +2,9 @@ import mongoose from "mongoose";
 
 const VideoSchema = new mongoose.Schema(
   {
-    playlistId: {
+    bookId: {
       type: "string",
-      // required: true,
+      required: true,
     },
     title: {
       type: "string",
