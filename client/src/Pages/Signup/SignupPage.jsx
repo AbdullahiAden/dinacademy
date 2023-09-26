@@ -75,12 +75,11 @@ const SignupPage = () => {
                 }}
                 value={password}
               />
+              {isLoading && <Loader />}
+              <button type="submit" disabled={isLoading}>
+                SIGN UP
+              </button>
             </div>
-            <button type="submit" disabled={isLoading}>
-              SIGN UP
-            </button>
-
-            {isLoading && <Loader />}
           </form>
         </div>
         <div className="right-sec">

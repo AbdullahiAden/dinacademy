@@ -80,12 +80,11 @@ const LoginPage = () => {
                 }}
                 value={password}
               />
+              {isLoading && <Loader />}
+              <button type="submit" disabled={isLoading}>
+                LOGIN
+              </button>
             </div>
-            {/* loader   */}
-            {isLoading && <Loader />}
-            <button type="submit" disabled={isLoading}>
-              LOGIN
-            </button>
           </form>
         </div>
         <div className="right-sec">

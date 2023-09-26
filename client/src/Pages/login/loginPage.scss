@@ -1,5 +1,7 @@
-$base-color: #060c11;
+$base-color: #0e1117;
 $secondary-color: #00b2fe;
+$lighter-gray: #141820;
+$card-border: #263035;
 
 .container {
   height: 100dvh;
@@ -124,7 +126,7 @@ $secondary-color: #00b2fe;
 
     button {
       padding: 15px 0;
-      margin-top: 2rem;
+      margin-top: 4rem;
       width: 100%;
     }
   }
@@ -141,16 +143,25 @@ $secondary-color: #00b2fe;
     margin: 1rem 0;
     flex-direction: column;
   }
-
   .form-sec {
-    max-width: 300px;
-    padding: 0;
-  }
-  .form {
-    width: 320px;
+    width: 400px;
+
+    .form {
+      width: 100%;
+
+      .form-input {
+        padding: 0;
+
+        input {
+          margin-top: 1rem;
+        }
+      }
+    }
 
     button {
-      width: 90%;
+      padding: 15px 0;
+      margin-top: 4rem;
+      width: 100%;
     }
   }
 }
@@ -161,16 +172,25 @@ $secondary-color: #00b2fe;
     margin: 1rem 0;
     flex-direction: column;
   }
-
   .form-sec {
-    max-width: 350px;
-    padding: 0;
-  }
-  .form {
-    width: 100%;
+    width: 400px;
+
+    .form {
+      width: 100%;
+
+      .form-input {
+        padding: 0;
+
+        input {
+          margin-top: 1rem;
+        }
+      }
+    }
 
     button {
-      width: 90%;
+      padding: 15px 0;
+      margin-top: 4rem;
+      width: 100%;
     }
   }
 }
@@ -190,7 +210,7 @@ $secondary-color: #00b2fe;
     width: 100%;
 
     button {
-      width: 90%;
+      width: 100%;
     }
   }
 }
