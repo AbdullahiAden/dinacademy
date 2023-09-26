@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./videocard.scss";
+import "./card.scss";
 import axios from "axios";
 
 import Carousel from "react-multi-carousel";
@@ -7,9 +7,9 @@ import "react-multi-carousel/lib/styles.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useGetAllVideosQuery } from "../../slices/videosApiSlice";
+import { useGetAllBooksQuery } from "../../slices/booksApiSlice";
 import { useGetVideos } from "../../slices/apiSlice";
-import { setVideosData } from "../../slices/videoSlice";
+import { setBooksData } from "../../slices/bookSlice";
 
 import Loader from "../Loader";
 
@@ -35,15 +35,15 @@ const VideoCard = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { videosData } = useSelector((state) => state.videos);
+  const { booksData } = useSelector((state) => state.books);
 
-  const { data, isLoading, error } = useGetAllVideosQuery();
+  const { data, isLoading, error } = useGetAllBooksQuery();
 
   useEffect(() => {
     if (data) {
       console.log(data);
       //set data to our global state
-      dispatch(setVideosData({ ...data }));
+      dispatch(setBooksData({ ...data }));
     }
   }, [data]);
 
@@ -62,8 +62,9 @@ const VideoCard = (props) => {
   //   }
   // };
   return (
-    <div className="container">
-      <Carousel
+    <div className="card-container">
+      <div className="card-wrapper">
+        {/* <Carousel
         className="vid-wrapper"
         responsive={responsive}
         swipeable={true}
@@ -75,23 +76,48 @@ const VideoCard = (props) => {
         containerClass="carousel-contaner"
         deviceType={props.deviceType}
         itemClass="carousel-item-padding-40-px"
-      >
+      > */}
+
         {isLoading && <Loader />}
         {data &&
-          data.map((video) => {
+          data.map((book) => {
             return (
-              <Link to={`/watch/${video._id}`} key={video._id}>
-                <div
-                  className="video-card"
-                  onClick={() => handleOnClick(video._id)}
-                >
-                  <img src={video.thumbnail} alt="" />
-                  {video.titel}
-                </div>
-              </Link>
+              <div key={book._id} className="card">
+                <Link to={`/books/${book._id}`}>
+                  <img
+                    src={book.imgUrl}
+                    alt=""
+                    onClick={() => handleOnClick(book._id)}
+                  />
+                  <p> {book.title}</p>
+                </Link>
+              </div>
             );
           })}
-      </Carousel>
+
+        {/* <div className="card">
+          <img
+            src="https://plus.unsplash.com/premium_photo-1671308539073-ebf8985a6a11?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=700&q=60"
+            alt=""
+          />
+          <p>Book title </p>
+        </div>
+        <div className="card">
+          <img
+            src="https://plus.unsplash.com/premium_photo-1671308539073-ebf8985a6a11?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=700&q=60"
+            alt=""
+          />
+          <p>Book title </p>
+        </div>
+        <div className="card">
+          <img
+            src="https://plus.unsplash.com/premium_photo-1671308539073-ebf8985a6a11?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=700&q=60"
+            alt=""
+          />
+          <p>Book title </p>
+        </div> */}
+        {/* </Carousel> */}
+      </div>
     </div>
   );
 };
