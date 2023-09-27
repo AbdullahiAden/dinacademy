@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import Player from "../../components/Player/Player";
-import "../../components/Player/player.scss";
+import "./watch.scss";
 import ReactPlayer from "react-player";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -21,7 +21,7 @@ const Watch = () => {
     const fetchVideos = async () => {
       const res = await axios.get(`/api/videos/find/${params.id}`);
       dispatch(setClickedVideoData({ ...res.data }));
-      console.log(res.data);
+      // console.log(res.data);
     };
     fetchVideos();
 
