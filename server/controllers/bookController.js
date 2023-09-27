@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Book from "../models/BookModels.js";
+import Videos from "../models/VideoModels.js";
 
 const addBook = asyncHandler(async (req, res) => {
   //   const newVideo = new Video({ playlistId: req.user.id, ...req.body });
@@ -35,9 +36,13 @@ const getAllBooks = asyncHandler(async (req, res) => {
 
 const getBook = asyncHandler(async (req, res) => {
   const book = await Book.findById(req.params.id);
+  const bookVids = await Videos.find({ bookId: book._id });
 
   if (book) {
-    res.status(200).json(book);
+    if (bookVids) {
+      res.status(200);
+      res.json({ book: book, bookVids: bookVids });
+    }
   } else {
     res.status(401);
     throw new Error("book not found");
