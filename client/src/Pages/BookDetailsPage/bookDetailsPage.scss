@@ -24,3 +24,32 @@ $card-border: #263035;
     flex: 1;
   }
 }
+.vids-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 0 1rem;
+  margin: 3rem 0 0 1rem;
+
+  div {
+    font-weight: bolder;
+    font-size: 1rem;
+  }
+}
+.vid-card-wrapper {
+  display: flex;
+  margin: 1rem 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  .card {
+    flex-direction: column;
+
+    .vid-desc {
+      font-weight: lighter;
+      opacity: 50%;
+      font-size: 1rem;
+    }
+  }
+}

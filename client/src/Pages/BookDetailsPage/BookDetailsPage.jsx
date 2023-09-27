@@ -49,6 +49,21 @@ const BookDetailsPage = () => {
               </div>
             </div>
           )}
+
+          <div className="vids-container">
+            <div>All videos</div>
+          </div>
+          <div className="vid-card-wrapper">
+            {singleBookData.bookVids.map((videos) => {
+              return (
+                <div className="card">
+                  <img src={videos.imgUrl} alt="" />
+                  <p>{videos.title}</p>
+                  <p className="vid-desc">{videos.description}</p>
+                </div>
+              );
+            })}
+          </div>
         </>
       )}
     </div>
