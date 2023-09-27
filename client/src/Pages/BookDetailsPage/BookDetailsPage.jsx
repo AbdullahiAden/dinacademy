@@ -1,46 +1,55 @@
 import React, { useEffect } from "react";
+import "./bookDetailsPage.scss";
 import Navbar from "../../components/navbar/Navbar";
 import Card from "../../components/card/Card";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { useGetAllVideosQuery } from "../../slices/videosApiSlice";
-import { setVideosData } from "../../slices/videoSlice";
-
-import Loader from "../../components/Loader";
-import { setSingleBookData } from "../../slices/bookSlice";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import Loader from "../../components/Loader";
+
 import { useGetBookQuery } from "../../slices/booksApiSlice";
+import { setSingleBookData } from "../../slices/bookSlice";
 
 const BookDetailsPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
 
-  const { singleBookData } = useSelector((state) => state.books);
-  const { videosData } = useSelector((state) => state.videos);
-
-  //   const { BookVideos, isLoading, error } = useGetAllVideosQuery();
-  const { bookQueryData } = useGetBookQuery(params.id);
+  //to fetch data using rtk query
+  const { data, bookLoading } = useGetBookQuery(params.id);
 
   useEffect(() => {
-    const fetchBook = async () => {
-      const res = await axios.get(`/api/books/find/${params.id}`);
-      dispatch(setSingleBookData({ ...res.data }));
-      // console.log(res.data);
-    };
-    fetchBook();
-  }, []);
+    if (data) {
+      //save rtk query fetch to state
+      dispatch(setSingleBookData({ ...data }));
+    }
+  }, [data]);
+
+  // select data from state
+  const { singleBookData, loading } = useSelector((state) => state.books);
 
   return (
     <div>
       <Navbar />
-      {!singleBookData && <Loader />}
 
-      {singleBookData && (
-        <div>
-          <h1>{singleBookData.title}</h1>
-          <p>Book description</p>
-        </div>
+      {/* {bookLoading && <Loader />} */}
+      {singleBookData?.book?._id !== params.id ? (
+        <Loader />
+      ) : (
+        <>
+          {singleBookData && (
+            <div key={singleBookData.book._id} className="book-info">
+              <div className="img-sec">
+                <img src={singleBookData.book.imgUrl} alt="" />
+              </div>
+              {loading === true && <Loader />}
+              <div className="info-sec">
+                <p> {singleBookData.book.title}</p>
+                <p> {singleBookData.book.description}</p>
+              </div>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
