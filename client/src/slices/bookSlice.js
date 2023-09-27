@@ -5,6 +5,7 @@ const initialState = {
   booksData: null,
 
   singleBookData: null,
+  loading: true,
 };
 
 const BookSlice = createSlice({
@@ -13,9 +14,11 @@ const BookSlice = createSlice({
   reducers: {
     setBooksData: (state, action) => {
       state.booksData = action.payload;
+      state.loading = false;
     },
     setSingleBookData: (state, action) => {
       state.singleBookData = action.payload;
+      state.loading = false;
     },
   },
 });
