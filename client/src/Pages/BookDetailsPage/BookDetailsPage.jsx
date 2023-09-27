@@ -56,7 +56,11 @@ const BookDetailsPage = () => {
           <div className="vid-card-wrapper">
             {singleBookData.bookVids.map((videos) => {
               return (
-                <Link className="link">
+                <Link
+                  to={`/watch/${videos._id}`}
+                  key={videos._id}
+                  className="link"
+                >
                   <div className="vid-card">
                     <img src={videos.imgUrl} alt="" />
                     <p className="vid-title">{videos.title}</p>
