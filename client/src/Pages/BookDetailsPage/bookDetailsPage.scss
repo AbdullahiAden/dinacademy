@@ -1,0 +1,26 @@
+$base-color: #0e1117;
+$secondary-color: #00b2fe;
+$card-bg: #141820;
+$card-border: #263035;
+
+.book-info {
+  display: flex;
+  background: $card-bg;
+  gap: 1rem;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 5px;
+
+  .img-sec {
+    flex: 2;
+    img {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+    }
+  }
+
+  .info-sec {
+    flex: 1;
+  }
+}
