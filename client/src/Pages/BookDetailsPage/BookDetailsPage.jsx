@@ -56,11 +56,13 @@ const BookDetailsPage = () => {
           <div className="vid-card-wrapper">
             {singleBookData.bookVids.map((videos) => {
               return (
-                <div className="card">
-                  <img src={videos.imgUrl} alt="" />
-                  <p>{videos.title}</p>
-                  <p className="vid-desc">{videos.description}</p>
-                </div>
+                <Link className="link">
+                  <div className="vid-card">
+                    <img src={videos.imgUrl} alt="" />
+                    <p className="vid-title">{videos.title}</p>
+                    <p className="vid-desc">{videos.description}</p>
+                  </div>
+                </Link>
               );
             })}
           </div>
