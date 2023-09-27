@@ -4,12 +4,13 @@ import axios from "axios";
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useGetAllBooksQuery } from "../../slices/booksApiSlice";
 import { useGetVideos } from "../../slices/apiSlice";
 import { setBooksData } from "../../slices/bookSlice";
+import { setSingleBookData } from "../../slices/bookSlice";
 
 import Loader from "../Loader";
 
@@ -34,22 +35,32 @@ const Card = (props) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const params = useParams();
 
-  const { booksData } = useSelector((state) => state.books);
+  const { singleBookData } = useSelector((state) => state.books);
 
   const { data, isLoading, error } = useGetAllBooksQuery();
 
   useEffect(() => {
     if (data) {
-      console.log(data);
+      // console.log(data);
       //set data to our global state
       dispatch(setBooksData({ ...data }));
     }
   }, [data]);
 
-  const handleOnClick = (e) => {
+  const handleOnClick = async (e) => {
     {
-      // console.log(e);
+      console.log(e.title);
+      console.log(e._id);
+    }
+    //set single book data
+
+    try {
+      const res = await axios.get(`/api/books/find/${e._id}`);
+      dispatch(setSingleBookData({ ...res.data }));
+    } catch (err) {
+      console.log(err.response.data);
     }
   };
 
@@ -87,7 +98,7 @@ const Card = (props) => {
                   <img
                     src={book.imgUrl}
                     alt=""
-                    onClick={() => handleOnClick(book._id)}
+                    // onClick={() => handleOnClick(book)}
                   />
                   <p> {book.title}</p>
                 </Link>
