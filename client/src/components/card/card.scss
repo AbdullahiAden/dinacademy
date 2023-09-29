@@ -3,16 +3,11 @@ $secondary-color: #00b2fe;
 $card-bg: #141820;
 $card-border: #263035;
 
-.card-container {
-  border: 1px solid #00b2fe;
-}
-
 .card-wrapper {
   margin: auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  border: 1px solid rgb(15, 102, 223);
   padding-top: 1rem;
   gap: 2rem;
   // width: 900px;
