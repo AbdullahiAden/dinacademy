@@ -23,8 +23,9 @@ export const VideosApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     getVideo: builder.query({
-      query: (name) => ({
-        url: `${VIDEOS_URL}/id`,
+      query: (id) => ({
+        // url: `${VIDEOS_URL}/id`,
+        url: `${VIDEOS_URL}/find/${id}`,
         method: "GET",
       }),
     }),
