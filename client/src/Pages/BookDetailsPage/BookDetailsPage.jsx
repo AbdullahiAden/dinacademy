@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./bookDetailsPage.scss";
 import Navbar from "../../components/navbar/Navbar";
 import Card from "../../components/card/Card";
@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Loader from "../../components/Loader";
+import Upload from "../../components/Upload/Upload.jsx";
 
 import { useGetBookQuery } from "../../slices/booksApiSlice";
 import { setSingleBookData } from "../../slices/bookSlice";
@@ -14,9 +15,13 @@ const BookDetailsPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
+  const [openUpload, setOpenUpload] = useState(false);
 
   //to fetch data using rtk query
   const { data, bookLoading } = useGetBookQuery(params.id);
+  // select data from state
+  const { singleBookData, loading } = useSelector((state) => state.books);
+  const { userInfo } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (data) {
@@ -24,9 +29,6 @@ const BookDetailsPage = () => {
       dispatch(setSingleBookData({ ...data }));
     }
   }, [data]);
-
-  // select data from state
-  const { singleBookData, loading } = useSelector((state) => state.books);
 
   return (
     <div>
@@ -49,9 +51,14 @@ const BookDetailsPage = () => {
               </div>
             </div>
           )}
-
-          <div className="vids-container">
+          <div className="upload">
             <div>All videos</div>
+            {userInfo?.isAdmin === true && (
+              <button onClick={() => setOpenUpload(true)}>
+                upload video to book
+              </button>
+            )}
+            {openUpload && <Upload setOpenUpload={setOpenUpload} />}
           </div>
           <div className="vid-card-wrapper">
             {singleBookData.bookVids.map((videos) => {
