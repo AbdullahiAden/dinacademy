@@ -9,13 +9,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../slices/authSlice";
 import { useLogoutMutation } from "../../slices/usersApiSlice";
 import { toast } from "react-toastify";
-import Upload from "../Upload/Upload";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdwon, setOpenDropDown] = useState(false);
-
-  const [openUpload, setOpenUpload] = useState(false);
 
   const { userInfo } = useSelector((state) => state.auth);
 
@@ -98,13 +95,7 @@ const Navbar = () => {
               </li>
               {userInfo.isAdmin === true && (
                 <li>
-                  <NavLink
-                    to="#"
-                    className="nav-links"
-                    onClick={() => setOpenUpload(true)}
-                  >
-                    upload
-                  </NavLink>
+                  <NavLink>Admin</NavLink>
                 </li>
               )}
             </ul>
@@ -126,7 +117,6 @@ const Navbar = () => {
           </>
         )}
       </nav>
-      {openUpload && <Upload setOpenUpload={setOpenUpload} />}
     </>
   );
 };
