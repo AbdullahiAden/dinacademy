@@ -1,48 +1,69 @@
+$base-color: #0e1117;
+$secondary-color: #00b2fe;
+$card-bg: #141820;
+$card-border: #263035;
 .player-container {
   // display: flex;
   padding: 1rem;
 }
 .player-wrapper {
   display: flex;
-  gap: 2rem;
-  height: 500px;
-  border: 1px solid red;
+  border: 1px solid $card-border;
+  border-radius: 5px;
 
+  gap: 1rem;
+  height: 500px;
   margin: 1rem 2rem;
 }
 
 .player-sec {
   flex: 2;
 
-  .video {
-    border: 1px solid white;
-  }
+  // .video {
+  // }
   .video-desc {
     font-weight: bold;
     padding-top: 1rem;
+    margin-top: 4rem;
   }
 }
 .side-video-sec {
-  border: 1px solid white;
   flex: 1;
   padding: 0 1rem;
+  overflow-y: scroll;
+  border: 1px solid red;
 
-  .recommended-vids {
+  .reco-vids-wrapper {
     display: flex;
+    flex-direction: row;
     gap: 1rem;
-    border: 1px solid red;
-    align-items: center;
-    padding: 0;
+    border: 1px solid $card-border;
+    border-radius: 5px;
+    margin: 1rem 0;
+    padding: 10px;
 
-    .reco-vid-img {
-      height: 100px;
-      width: 200px;
-      object-fit: cover;
-      border-radius: 5px;
+    .link {
+      text-decoration: none;
+      color: white;
     }
-
-    .reco-vid-titel {
+    .reco-img {
+      img {
+        height: 100px;
+        width: 200px;
+        object-fit: cover;
+        border-radius: 5px;
+        border: 1px solid $card-border;
+      }
+    }
+    .reco-info {
       display: flex;
+      flex-direction: column;
+      .reco-title {
+        font-weight: smaller;
+      }
+      .reco-desc {
+        font-weight: bolder;
+      }
     }
   }
 }
