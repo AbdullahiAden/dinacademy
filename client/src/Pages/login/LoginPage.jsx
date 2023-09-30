@@ -42,7 +42,6 @@ const LoginPage = () => {
 
       // then call setCredentials which will set logged in user data to localstorage & to our state
       dispatch(setCredentials({ ...res }));
-      //todo: to dashboard
       navigate("/dashboard");
     } catch (err) {
       toast(err?.data?.message || err.error);
