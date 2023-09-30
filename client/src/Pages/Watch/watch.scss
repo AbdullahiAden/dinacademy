@@ -3,115 +3,51 @@ $secondary-color: #00b2fe;
 $card-bg: #141820;
 $card-border: #263035;
 .player-container {
-  // display: flex;
-  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  margin: 1rem;
+  max-height: 600px;
 }
+
 .player-wrapper {
   display: flex;
+  flex-direction: column;
+  flex: 2;
+  border-radius: 5px;
+
+  .player-sec {
+    height: 600px;
+
+    .video {
+      width: 10%;
+      height: 100%;
+    }
+  }
+}
+
+.side-video-sec {
+  flex: 1;
+  height: 500px;
+  overflow-y: scroll;
   border: 1px solid $card-border;
   border-radius: 5px;
 
-  gap: 1rem;
-  height: 500px;
-  margin: 1rem 2rem;
-}
-
-.player-sec {
-  flex: 2;
-
-  // .video {
-  // }
-  .video-desc {
-    font-weight: bold;
-    padding-top: 1rem;
-    margin-top: 4rem;
+  .link {
+    text-decoration: none;
+    color: white;
   }
-}
-.side-video-sec {
-  flex: 1;
-  padding: 0 1rem;
-  overflow-y: scroll;
-  border: 1px solid red;
 
   .reco-vids-wrapper {
     display: flex;
-    flex-direction: row;
     gap: 1rem;
     border: 1px solid $card-border;
-    border-radius: 5px;
-    margin: 1rem 0;
+    margin: 1rem;
     padding: 10px;
-
-    .link {
-      text-decoration: none;
-      color: white;
-    }
-    .reco-img {
-      img {
-        height: 100px;
-        width: 200px;
-        object-fit: cover;
-        border-radius: 5px;
-        border: 1px solid $card-border;
-      }
-    }
-    .reco-info {
-      display: flex;
-      flex-direction: column;
-      .reco-title {
-        font-weight: smaller;
-      }
-      .reco-desc {
-        font-weight: bolder;
-      }
-    }
+    border-radius: 5px;
   }
-}
-
-@media (280px <=width <=425px) {
-  .player-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    height: 500px;
-    width: 280px;
-    border: 1px solid rgb(255, 140, 0);
-
-    margin: 1rem 2rem;
-  }
-  .player-sec {
-    flex: 2;
-
-    .video {
-      border: 1px solid rgb(159, 24, 24);
-      width: 250px;
-    }
-    .video-desc {
-      font-weight: bold;
-      padding-top: 1rem;
-    }
-  }
-  .side-video-sec {
-    border: 1px solid rgb(255, 255, 255);
-    flex: 1;
-    padding-top: 3rem;
-    margin: 0;
-
-    .recommended-vids {
-      display: flex;
-      border: 1px solid rgb(0, 255, 76);
-      align-items: start;
-
-      .reco-vid-img {
-        height: 100px;
-        width: 200px;
-        object-fit: cover;
-        border-radius: 5px;
-      }
-
-      .reco-vid-titel {
-        display: flex;
-      }
-    }
+  img {
+    max-width: 200px;
+    height: 100px;
+    border-radius: 5px;
   }
 }

@@ -31,8 +31,8 @@ const Watch = () => {
       <Navbar />
       {isLoading && <Loader />}
       <div className="player-container">
-        <div className="player-wrapper">
-          {singleVideoData && (
+        {singleVideoData && (
+          <div className="player-wrapper">
             <div className="player-sec">
               <ReactPlayer
                 className="video"
@@ -41,42 +41,34 @@ const Watch = () => {
                 width="100%"
                 height="100%"
               />
-              <div key={singleVideoData._id} className="video-desc">
-                {singleVideoData.titel}
-              </div>
             </div>
-          )}
-          <div className="side-video-sec">
-            <p className="total-vid-numb">total videos</p>
-
             <div>
-              {singleBookData?.bookVids.map((videos) => {
-                return (
-                  <div className="reco-vids-wrapper">
-                    <div className="reco-img">
-                      <Link
-                        to={`/watch/${videos._id}`}
-                        key={videos._id}
-                        className="link"
-                      >
-                        <img
-                          src={videos.imgUrl}
-                          alt=""
-                          className="reco-vid-img "
-                        />
-                      </Link>
-                    </div>
-                    <div className="reco-info">
-                      <p className="reco-title">{videos.title}</p>
-                      <p className="reco-desc">{videos.description}</p>
-                    </div>
-                  </div>
-                );
-              })}
+              <h1 className="video-desc">{singleVideoData.title}</h1>
             </div>
           </div>
+        )}
+
+        <div className="side-video-sec">
+          {singleBookData?.bookVids.map((videos) => {
+            return (
+              <Link
+                to={`/watch/${videos._id}`}
+                key={videos._id}
+                className="link"
+              >
+                <div className="reco-vids-wrapper">
+                  <div className="reco-img">
+                    <img src={videos.imgUrl} alt="" className="reco-vid-img " />
+                  </div>
+                  <div className="reco-info">
+                    <p className="reco-title">{videos.title}</p>
+                    <p className="reco-desc">{videos.description}</p>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
         </div>
-        {singleVideoData.title}
       </div>
     </div>
   );
