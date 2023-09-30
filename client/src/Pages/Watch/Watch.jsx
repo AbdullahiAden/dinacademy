@@ -22,8 +22,6 @@ const Watch = () => {
     if (data) {
       dispatch(setClickedVideoData({ ...data }));
     }
-
-    // console.log(singleBookData?.bookVids);
   }, [data]);
 
   return (
@@ -42,27 +40,31 @@ const Watch = () => {
                 height="100%"
               />
             </div>
-            <div>
-              <h1 className="video-desc">{singleVideoData.title}</h1>
+            <div className="video-info">
+              <h1>{singleVideoData.title}</h1>
+              <p>{singleVideoData.description}</p>
             </div>
           </div>
         )}
 
         <div className="side-video-sec">
-          {singleBookData?.bookVids.map((videos) => {
+          {singleBookData?.bookVids.map((video) => {
             return (
-              <Link
-                to={`/watch/${videos._id}`}
-                key={videos._id}
-                className="link"
-              >
-                <div className="reco-vids-wrapper">
+              <Link to={`/watch/${video._id}`} key={video._id} className="link">
+                {params.id === video._id}
+                <div
+                  className={
+                    params.id === video._id
+                      ? "reco-vids-wrapper active-vid"
+                      : "reco-vids-wrapper"
+                  }
+                >
                   <div className="reco-img">
-                    <img src={videos.imgUrl} alt="" className="reco-vid-img " />
+                    <img src={video.imgUrl} alt="" className="reco-vid-img " />
                   </div>
                   <div className="reco-info">
-                    <p className="reco-title">{videos.title}</p>
-                    <p className="reco-desc">{videos.description}</p>
+                    <p className="reco-title">{video.title}</p>
+                    <p className="reco-desc">{video.description}</p>
                   </div>
                 </div>
               </Link>
