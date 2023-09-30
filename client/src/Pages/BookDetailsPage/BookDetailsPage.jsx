@@ -18,9 +18,9 @@ const BookDetailsPage = () => {
   const [openUpload, setOpenUpload] = useState(false);
 
   //to fetch data using rtk query
-  const { data, bookLoading } = useGetBookQuery(params.id);
+  const { data, bookFetchLoading } = useGetBookQuery(params.id);
   // select data from state
-  const { singleBookData, loading } = useSelector((state) => state.books);
+  const { singleBookData, stateLoading } = useSelector((state) => state.books);
   const { userInfo } = useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const BookDetailsPage = () => {
     <div>
       <Navbar />
 
-      {/* {bookLoading && <Loader />} */}
+      {bookFetchLoading && <Loader />}
       {singleBookData?.book?._id !== params.id ? (
         <Loader />
       ) : (
@@ -44,7 +44,7 @@ const BookDetailsPage = () => {
               <div className="img-sec">
                 <img src={singleBookData.book.imgUrl} alt="" />
               </div>
-              {loading === true && <Loader />}
+              {stateLoading === true && <Loader />}
               <div className="info-sec">
                 <p> {singleBookData.book.title}</p>
                 <p> {singleBookData.book.description}</p>
