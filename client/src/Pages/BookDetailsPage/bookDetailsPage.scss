@@ -69,15 +69,15 @@ $card-border: #263035;
     img {
       border-radius: 5px;
       width: 350px;
-      height: 200px;
+      height: 150px;
       object-fit: cover;
     }
 
     .vid-title {
-      padding: 1rem 0;
+      padding: 10px 0;
+      font-weight: bold;
     }
     .vid-desc {
-      font-weight: bolder;
       opacity: 50%;
       font-size: 1rem;
     }
