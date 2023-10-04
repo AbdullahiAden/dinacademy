@@ -2,13 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import { apiSlice } from "./apiSlice";
 
 const initialState = {
-  videosData: localStorage.getItem("videosData")
-    ? JSON.parse(localStorage.getItem("videosData"))
-    : null,
+  videosData: null,
 
-  singleVideoData: localStorage.getItem("singleVideoData")
-    ? JSON.parse(localStorage.getItem("singleVideoData"))
-    : null,
+  singleVideoData: null,
 };
 
 const VideoSlice = createSlice({
@@ -17,11 +13,11 @@ const VideoSlice = createSlice({
   reducers: {
     setVideosData: (state, action) => {
       state.videosData = action.payload;
-      localStorage.setItem("videosData", JSON.stringify(action.payload));
+      // localStorage.setItem("videosData", JSON.stringify(action.payload));
     },
     setClickedVideoData: (state, action) => {
       state.singleVideoData = action.payload;
-      localStorage.setItem("singleVideoData", JSON.stringify(action.payload));
+      // localStorage.setItem("singleVideoData", JSON.stringify(action.payload));
     },
   },
 });
