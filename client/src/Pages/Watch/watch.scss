@@ -62,3 +62,22 @@ $active: #09172d;
     background: $active;
   }
 }
+
+@media (280px <=width <=900px) {
+  .player-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .player-sec {
+    background: #621313;
+    width: 100%;
+    height: fit-content;
+
+    .player {
+      .video {
+        width: 100%;
+      }
+    }
+  }
+}
