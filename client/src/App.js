@@ -17,10 +17,7 @@ function App() {
   return (
     <div className="App">
       {/* <Navbar /> */}
-      <ToastContainer
-        autoClose={900}
-        toastStyle={{ backgroundColor: "#00b2fe" }}
-      />
+      <ToastContainer toastStyle={{ backgroundColor: "#00b2fe" }} />
       <Routes>
         <Route index element={<HomePage />} />
 

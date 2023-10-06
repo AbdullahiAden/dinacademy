@@ -2,25 +2,12 @@ import { useEffect, useState } from "react";
 import "./upload.scss";
 import { useNavigate, useParams } from "react-router-dom";
 
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "firebase/storage";
-
-import app from "../../firebase";
-import axios from "axios";
 import { useAddVideoMutation } from "../../slices/videosApiSlice";
+import Loader from "../Loader";
+import { toast } from "react-toastify";
 
 const Upload = ({ setOpenUpload }) => {
-  const [video, setVideo] = useState(null);
-  const [image, setImage] = useState(null);
-  const [videoPerc, setVideoPerc] = useState(0);
-  const [imagePerc, setImagePerc] = useState(0);
-
   const [inputs, setInputs] = useState({});
-  const [tags, setTags] = useState([]);
 
   const navigate = useNavigate();
   const params = useParams();
@@ -34,77 +21,23 @@ const Upload = ({ setOpenUpload }) => {
     });
   };
 
-  const handleTags = (e) => {
-    setTags(e.target.value.split(","));
-  };
-
-  const uploadFile = (file, urlType) => {
-    //use firebse uplad process
-    const storage = getStorage(app);
-    //for uniqie file name
-    const fileName = new Date().getTime() + file.name;
-
-    const storageRef = ref(storage, file.name);
-
-    const uploadTask = uploadBytesResumable(storageRef, file);
-    // Listen for state changes, errors, and completion of the upload.
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        urlType === "imgUrl"
-          ? setImagePerc(Math.round(progress))
-          : setVideoPerc(Math.round(progress));
-        console.log("Upload is " + progress + "% done");
-        switch (snapshot.state) {
-          case "paused":
-            console.log("Upload is paused");
-            break;
-          case "running":
-            console.log("Upload is running");
-            break;
-          default:
-            break;
-        }
-      },
-      (error) => {},
-
-      () => {
-        // Upload completed successfully, now we can get the download URL
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setInputs((prev) => {
-            return { ...prev, [urlType]: downloadURL };
-          });
-        });
-      }
-    );
-  };
-
-  useEffect(() => {
-    video && uploadFile(video, "videoUrl");
-  }, [video]);
-
-  useEffect(() => {
-    image && uploadFile(image, "imgUrl");
-  }, [image]);
-
   const handleUpload = async (e) => {
     e.preventDefault();
+    console.log(inputs);
+
     try {
       const res = await addVideo({
         ...inputs,
         bookId: params.id,
-        tags,
       }).unwrap();
-      console.log(res._id);
+
       setOpenUpload(false);
       res.status === 200 && navigate(`/watch/${params.id}`);
       //reload page after adding video
       window.location.reload(false);
     } catch (err) {
       console.log(err?.data?.message || err.error);
+      toast(err?.data?.message || err.error);
     }
   };
 
@@ -115,7 +48,8 @@ const Upload = ({ setOpenUpload }) => {
           X
         </div>
         <h1 className="title">Upload A video</h1>
-        <div className="file">
+        {isLoading && <Loader />}
+        {/* <div className="file">
           <label htmlFor="video"> choose Video</label>
           {videoPerc > 0 ? (
             "uploading " + videoPerc + "%"
@@ -128,8 +62,8 @@ const Upload = ({ setOpenUpload }) => {
               onChange={(e) => setVideo(e.target.files[0])}
             />
           )}
-        </div>
-        <div className="video-thumbnail">
+        </div> */}
+        {/* <div className="video-thumbnail">
           <label htmlFor="image">image</label>
           {imagePerc > 0 ? (
             "uploading" + imagePerc + "%"
@@ -142,8 +76,19 @@ const Upload = ({ setOpenUpload }) => {
               onChange={(e) => setImage(e.target.files[0])}
             />
           )}
-        </div>
+        </div> */}
 
+        <div className="video-title">
+          <label htmlFor="input-url">Video Url</label>
+          <input
+            type="url"
+            required
+            name="videoUrl"
+            id="input-url"
+            className="title-input"
+            onChange={handelInputChange}
+          />
+        </div>
         <div className="video-title">
           <label htmlFor="input-title">Titel</label>
           <input
@@ -164,18 +109,8 @@ const Upload = ({ setOpenUpload }) => {
             onChange={handelInputChange}
           ></textarea>
         </div>
-        <div className="video-tags">
-          <label htmlFor="">Tags</label>
-          <input
-            type="text"
-            name=""
-            id=""
-            placeholder="separte tags with commas ,"
-            onChange={handleTags}
-          />
-        </div>
 
-        <button className="upload-btn" onClick={handleUpload}>
+        <button type="submit" className="upload-btn" onClick={handleUpload}>
           Upload
         </button>
       </div>
