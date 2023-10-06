@@ -5,15 +5,18 @@ const addVideo = asyncHandler(async (req, res) => {
   //   const newVideo = new Video({ playlistId: req.user.id, ...req.body });
   const newVideo = new Video({ ...req.body });
   // if video exists
-  // const { titel } = req.body;
-  // const videoExists = await Video.findOne({ titel });
-  // if (videoExists) {
-  //   res.status(400);
-  //   throw new Error("video already exists");
-  // }
+  const { title, videoUrl } = req.body;
+
+  const videoExists = await Video.findOne({ videoUrl });
+  if (videoExists) {
+    res.status(400);
+    throw new Error("video with such Link already exists");
+  }
+  if (!title || !videoUrl) {
+    throw new Error("Please Enter Video Link & Titel ");
+  }
 
   await newVideo.save();
-
   res.status(201).json(newVideo);
 
   //if video is created
