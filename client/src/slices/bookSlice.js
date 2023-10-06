@@ -4,7 +4,9 @@ import { apiSlice } from "./apiSlice";
 const initialState = {
   booksData: null,
 
-  singleBookData: null,
+  singleBookData: localStorage.getItem("singleBookData")
+    ? JSON.parse(localStorage.getItem("singleBookData"))
+    : null,
   loading: true,
 };
 
@@ -19,7 +21,7 @@ const BookSlice = createSlice({
     },
     setSingleBookData: (state, action) => {
       state.singleBookData = action.payload;
-      // localStorage.setItem("singleBookData", JSON.stringify(action.payload));
+      localStorage.setItem("singleBookData", JSON.stringify(action.payload));
 
       state.loading = false;
     },
