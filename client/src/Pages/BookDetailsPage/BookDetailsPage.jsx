@@ -27,6 +27,7 @@ const BookDetailsPage = () => {
     if (data) {
       //save rtk query fetch to state
       dispatch(setSingleBookData({ ...data }));
+      console.log(data);
     }
   }, [data]);
 
@@ -61,7 +62,7 @@ const BookDetailsPage = () => {
             {openUpload && <Upload setOpenUpload={setOpenUpload} />}
           </div>
           <div className="vid-card-wrapper">
-            {singleBookData.bookVids.map((videos) => {
+            {singleBookData?.bookVids?.map((videos) => {
               return (
                 <Link
                   to={`/watch/${videos._id}`}
