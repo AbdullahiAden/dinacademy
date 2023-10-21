@@ -20,7 +20,15 @@ const Dashboard = () => {
       <Navbar />
       <div className="top-sec">
         <h1>All of our books</h1>
+
+        {userInfo.isAdmin === true && (
+          <div className="add-book">
+            <button>add book </button>
+          </div>
+        )}
       </div>
+
+      <form action=""></form>
 
       <Card />
     </div>
