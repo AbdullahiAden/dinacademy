@@ -75,6 +75,7 @@ const updateBook = asyncHandler(async (req, res) => {
 
 const deleteBook = asyncHandler(async (req, res) => {
   // only admin can delete books
+  //todo: delete all videos of book
 
   if (req.user.isAdmin === true) {
     await Book.findByIdAndDelete(req.params.id);
