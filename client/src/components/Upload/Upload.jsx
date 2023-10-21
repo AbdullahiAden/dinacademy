@@ -23,7 +23,6 @@ const Upload = ({ setOpenUpload }) => {
 
   const handleUpload = async (e) => {
     e.preventDefault();
-    console.log(inputs);
 
     try {
       const res = await addVideo({
@@ -49,34 +48,6 @@ const Upload = ({ setOpenUpload }) => {
         </div>
         <h1 className="title">Upload A video</h1>
         {isLoading && <Loader />}
-        {/* <div className="file">
-          <label htmlFor="video"> choose Video</label>
-          {videoPerc > 0 ? (
-            "uploading " + videoPerc + "%"
-          ) : (
-            <input
-              type="file"
-              accept="video/*"
-              name=""
-              id="video"
-              onChange={(e) => setVideo(e.target.files[0])}
-            />
-          )}
-        </div> */}
-        {/* <div className="video-thumbnail">
-          <label htmlFor="image">image</label>
-          {imagePerc > 0 ? (
-            "uploading" + imagePerc + "%"
-          ) : (
-            <input
-              type="file"
-              accept="image/*"
-              name=""
-              id="image"
-              onChange={(e) => setImage(e.target.files[0])}
-            />
-          )}
-        </div> */}
 
         <div className="video-title">
           <label htmlFor="input-url">Video Url</label>
