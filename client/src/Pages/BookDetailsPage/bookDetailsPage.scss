@@ -23,6 +23,18 @@ $card-border: #263035;
   .info-sec {
     flex: 1;
   }
+  .book-crud {
+    margin: 3rem 0 0 0;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    color: $secondary-color;
+
+    .delete {
+      color: red;
+      cursor: pointer;
+    }
+  }
 }
 .upload {
   display: flex;

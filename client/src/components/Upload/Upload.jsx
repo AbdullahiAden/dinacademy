@@ -75,6 +75,8 @@ const Upload = ({ setOpenUpload }) => {
             <input
               type="url"
               required
+              pattern="https://.*"
+              size="30"
               name="videoUrl"
               id="input-url"
               className="title-input"

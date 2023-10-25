@@ -28,11 +28,21 @@ export const BooksApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    deleteBook: builder.mutation({
+      query: (id) => ({
+        url: `${BOOKS_URL}/delete/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
 //specific convention to export mutation
 //use + name + mutation
 //use + name + query
-export const { useAddBookMutation, useGetAllBooksQuery, useGetBookQuery } =
-  BooksApiSlice;
+export const {
+  useAddBookMutation,
+  useGetAllBooksQuery,
+  useGetBookQuery,
+  useDeleteBookMutation,
+} = BooksApiSlice;

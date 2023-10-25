@@ -7,8 +7,13 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Loader from "../../components/Loader";
 import Upload from "../../components/Upload/Upload.jsx";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-import { useGetBookQuery } from "../../slices/booksApiSlice";
+import {
+  useGetBookQuery,
+  useDeleteBookMutation,
+} from "../../slices/booksApiSlice";
+
 import { setSingleBookData } from "../../slices/bookSlice";
 
 const BookDetailsPage = () => {
@@ -22,6 +27,19 @@ const BookDetailsPage = () => {
   // select data from state
   const { singleBookData, stateLoading } = useSelector((state) => state.books);
   const { userInfo } = useSelector((state) => state.auth);
+
+  const [deleteBook, { isDeleting }] = useDeleteBookMutation();
+
+  const handleDeletBook = async (id) => {
+    console.log(id);
+    try {
+      await deleteBook(id);
+      navigate("/dashboard");
+      window.location.reload(false);
+    } catch (err) {
+      console.log(err?.data?.message || err.error);
+    }
+  };
 
   useEffect(() => {
     if (data) {
@@ -49,6 +67,17 @@ const BookDetailsPage = () => {
               <div className="info-sec">
                 <p> {singleBookData.book.title}</p>
                 <p> {singleBookData.book.description}</p>
+
+                <hr />
+                <div className="book-crud">
+                  <p>update book</p>
+                  <p
+                    className="delete"
+                    onClick={() => handleDeletBook(singleBookData.book._id)}
+                  >
+                    delete book
+                  </p>
+                </div>
               </div>
             </div>
           )}
