@@ -6,12 +6,14 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useGetAllBooksQuery } from "../../slices/booksApiSlice";
+
 import { setBooksData } from "../../slices/bookSlice";
 
 import Loader from "../Loader";
 
 const Card = () => {
   const { data, isLoading, error } = useGetAllBooksQuery();
+
   const dispatch = useDispatch();
 
   useEffect(() => {
